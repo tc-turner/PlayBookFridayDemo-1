@@ -1,0 +1,91 @@
+{
+  "definitionVersion" : "1.0.0",
+  "name" : "PlayBook Friday Demo",
+  "panX" : 20.0,
+  "panY" : 20.0,
+  "logLevel" : "WARN",
+  "jobList" : [ {
+    "id" : 7764,
+    "appCatalogItem" : {
+      "programName" : "TCPB - SNS v0.0",
+      "displayName" : "Send SNS",
+      "programVersion" : "0.0.1"
+    },
+    "name" : "Send SNS 1",
+    "jobParameterList" : [ {
+      "appCatalogItemParameter" : {
+        "paramName" : "secret_access_key"
+      },
+      "value" : "${ORGANIZATION:KEYCHAIN:AWS Secret}"
+    }, {
+      "appCatalogItemParameter" : {
+        "paramName" : "sns_message"
+      },
+      "value" : "Indicator added to #Trigger:693:trg.tc.owner!String : #Trigger:693:trg.tc.address!String"
+    }, {
+      "appCatalogItemParameter" : {
+        "paramName" : "topic_arn"
+      },
+      "value" : "arn:aws:sns:REGION:ACCOUNT_ID:TOPIC_NAME"
+    }, {
+      "appCatalogItemParameter" : {
+        "paramName" : "aws_region"
+      },
+      "value" : "us-east-2"
+    }, {
+      "appCatalogItemParameter" : {
+        "paramName" : "access_key_id"
+      },
+      "value" : "${ORGANIZATION:KEYCHAIN:AWS ID}"
+    } ],
+    "locationLeft" : 410.0,
+    "locationTop" : 130.0,
+    "outputVariables" : "[{\"name\":\"sns.debug\",\"type\":\"String\"}]",
+    "playbookRetryEnabled" : false
+  }, {
+    "id" : 7765,
+    "appCatalogItem" : {
+      "programName" : "Logger",
+      "displayName" : "Logger",
+      "programVersion" : "1.0.0"
+    },
+    "name" : "Logger 1",
+    "jobParameterList" : [ {
+      "appCatalogItemParameter" : {
+        "paramName" : "logging"
+      },
+      "value" : "ERROR"
+    }, {
+      "appCatalogItemParameter" : {
+        "paramName" : "log_message"
+      },
+      "value" : "#App:7764:sns.debug!String"
+    } ],
+    "locationLeft" : 420.0,
+    "locationTop" : 250.0,
+    "playbookRetryEnabled" : false
+  } ],
+  "playbookConnectionList" : [ {
+    "type" : "Pass",
+    "isCircularOnTarget" : false,
+    "sourceJobId" : 7764,
+    "targetJobId" : 7765
+  }, {
+    "type" : "Pass",
+    "isCircularOnTarget" : false,
+    "targetJobId" : 7764,
+    "sourceTriggerId" : 693
+  } ],
+  "playbookTriggerList" : [ {
+    "id" : 693,
+    "name" : "Address Trigger 1",
+    "type" : "Address",
+    "eventType" : "Create",
+    "anyOrg" : false,
+    "orFilters" : false,
+    "fireOnDuplicate" : true,
+    "renderBodyAsTip" : false,
+    "outputVariables" : "[{\"name\":\"trg.tc.address\",\"type\":\"String\"},{\"name\":\"trg.tc.owner\",\"type\":\"String\"}]"
+  } ],
+  "dateExported" : "10/6/17 1:46 AM"
+}

@@ -1,0 +1,42 @@
+#
+# Language Exclusions
+#
+
+*.pyc
+
+#
+# TcEx Exclusions
+#
+
+lib*
+*.log
+log
+tc.json
+
+#
+# App Specific Exclusions
+#
+
+sample.json
+tcpb_slack*
+
+#
+# Build Exclusions
+#
+
+target
+build
+temp
+
+#
+# IDE Exclusions
+#
+
+.c9
+.python-version
+
+#
+# Other Nonsense
+#
+
+bcs*

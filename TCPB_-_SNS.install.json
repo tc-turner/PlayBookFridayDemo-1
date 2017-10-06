@@ -1,0 +1,73 @@
+{
+  "allowOnDemand": true,
+  "displayName": "Send SNS",
+  "languageVersion": "2.7",
+  "listDelimiter": "|",
+  "note": "This App sends a customizable message via AWS SNS.",
+  "params": [{
+    "encrypt": false,
+    "label": "AWS Region",
+    "name": "aws_region",
+    "note": "AWS Region",
+    "playbookDataType": [
+      "String"
+    ],
+    "required": true,
+    "sequence": 1,
+    "type": "Choice",
+    "validValues": ["ap-south-1","eu-west-2","eu-west-1","ap-northeast-2","ap-northeast-1","sa-east-1","ca-central-1","ap-southeast-1","ap-southeast-2","eu-central-1","us-east-1","us-east-2","us-west-1","us-west-2"]
+  }, {
+    "encrypt": false,
+    "label": "Topic ARN",
+    "name": "topic_arn",
+    "note": "SNS topic to publish a message to",
+    "playbookDataType": [
+      "String"
+    ],
+    "required": true,
+    "sequence": 1,
+    "type": "String",
+    "validValues": ["${TEXT}"]
+  }, {
+    "encrypt": false,
+    "label": "IAM Access Key ID",
+    "name": "access_key_id",
+    "note": "AWS Access Key",
+    "required": true,
+    "sequence": 2,
+    "type": "String",
+    "validValues": ["${KEYCHAIN}"]
+  }, {
+    "encrypt": false,
+    "label": "IAM Secret Access Key",
+    "name": "secret_access_key",
+    "note": "AWS Secret Access Key",
+    "required": true,
+    "sequence": 3,
+    "type": "String",
+    "validValues": ["${KEYCHAIN}"]
+  }, {
+    "encrypt": false,
+    "label": "Message",
+    "name": "sns_message",
+    "note": "Message to publish",
+    "playbookDataType": [
+      "String"
+    ],
+    "required": true,
+    "sequence": 4,
+    "type": "String",
+    "validValues": ["${TEXT}"]
+  }],
+  "playbook": {
+    "outputVariables": [{
+      "name": "sns.debug",
+      "type": "String"
+    }],
+    "type": "Client"
+  },
+  "programLanguage": "PYTHON",
+  "programMain": "pb_sns",
+  "programVersion": "0.0.1",
+  "runtimeLevel": "Playbook"
+}
