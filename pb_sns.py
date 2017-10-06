@@ -48,7 +48,7 @@ def main():
         )
 
         response = client.publish(
-            TopicArn=args.topic_arn,
+            TopicArn=tcex.playbook.read(args.topic_arn),
             Message=tcex.playbook.read(args.sns_message),
             Subject='TC PB Example'
         )
