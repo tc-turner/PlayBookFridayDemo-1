@@ -21,9 +21,6 @@
     "label": "Topic ARN",
     "name": "topic_arn",
     "note": "SNS topic to publish a message to",
-    "playbookDataType": [
-      "String"
-    ],
     "required": true,
     "sequence": 1,
     "type": "String",
